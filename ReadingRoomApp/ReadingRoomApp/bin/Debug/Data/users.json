@@ -1,0 +1,28 @@
+[
+  {
+    "PasswordHash": "gSSlHj06PNrvwWj4+Z5gvswvdkGnz+/f9iDj4qFNHh4=",
+    "Id": 1,
+    "Username": "RedKotik",
+    "Email": "admin@readingroom.com",
+    "FirstName": "Admin",
+    "LastName": "User",
+    "Role": 2,
+    "FullName": "Admin User",
+    "IsReader": false,
+    "IsAuthor": false,
+    "IsAdmin": true
+  },
+  {
+    "PasswordHash": "BjudUdA4h8Tlc/5X5Yvly5Oj3OGQUVm28fURs/6VJ94=",
+    "Id": 2,
+    "Username": "Kotik",
+    "Email": "dorka2740@gmail.com",
+    "FirstName": "Сергей",
+    "LastName": "Конюхов",
+    "Role": 0,
+    "FullName": "Сергей Конюхов",
+    "IsReader": true,
+    "IsAuthor": false,
+    "IsAdmin": false
+  }
+]
