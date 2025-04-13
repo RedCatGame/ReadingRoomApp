@@ -1,0 +1,92 @@
+﻿<!-- ReaderListView.xaml (обновленный) -->
+<UserControl x:Class="ReadingRoomApp.Views.ReaderListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReadingRoomApp.Views"
+             xmlns:viewModels="clr-namespace:ReadingRoomApp.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModels:AddReaderViewModel}">
+            <local:AddReaderView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:ReaderDetailsViewModel}">
+            <local:ReaderDetailsView />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid Margin="10" Visibility="{Binding IsListViewVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Список читателей" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,10" 
+                       Grid.Row="0"/>
+
+            <DataGrid Grid.Row="1" 
+                      ItemsSource="{Binding Readers}" 
+                      SelectedItem="{Binding SelectedReader}" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True" 
+                      SelectionMode="Single" 
+                      BorderThickness="1" 
+                      BorderBrush="#DDDDDD"
+                      MouseDoubleClick="DataGrid_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="120"/>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="150"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                    <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}" Width="120"/>
+                    <DataGridTextColumn Header="Книг на руках" Binding="{Binding BorrowedBooks.Count}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="2" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,10,0,0">
+                <Button Content="Добавить" 
+                        Command="{Binding AddReaderCommand}" 
+                        Padding="10,5" 
+                        Margin="0,0,10,0" 
+                        Background="#2196F3" 
+                        Foreground="White" 
+                        BorderThickness="0"/>
+                <Button Content="Просмотр" 
+                        Command="{Binding ViewReaderDetailsCommand}" 
+                        Padding="10,5" 
+                        Margin="0,0,10,0" 
+                        IsEnabled="{Binding SelectedReader, Converter={StaticResource NullToBoolConverter}}" 
+                        Background="#00BCD4" 
+                        Foreground="White" 
+                        BorderThickness="0"/>
+                <Button Content="Редактировать" 
+                        Command="{Binding EditReaderCommand}" 
+                        Padding="10,5" 
+                        Margin="0,0,10,0" 
+                        IsEnabled="{Binding SelectedReader, Converter={StaticResource NullToBoolConverter}}" 
+                        Background="#FFC107" 
+                        Foreground="White" 
+                        BorderThickness="0"/>
+                <Button Content="Удалить" 
+                        Command="{Binding DeleteReaderCommand}" 
+                        Padding="10,5" 
+                        IsEnabled="{Binding SelectedReader, Converter={StaticResource NullToBoolConverter}}" 
+                        Background="#F44336" 
+                        Foreground="White" 
+                        BorderThickness="0"/>
+            </StackPanel>
+        </Grid>
+
+        <ContentControl Content="{Binding CurrentView}" />
+    </Grid>
+</UserControl>

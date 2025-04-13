@@ -1,0 +1,130 @@
+﻿<!-- BookDetailsView.xaml -->
+<UserControl x:Class="ReadingRoomApp.Views.BookDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReadingRoomApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="600">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Детали книги" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,20" 
+                   Grid.Row="0"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- ID -->
+                <TextBlock Text="ID:" 
+                           Grid.Row="0" 
+                           Grid.Column="0" 
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,15"/>
+                <TextBlock Text="{Binding Book.Id}" 
+                           Grid.Row="0" 
+                           Grid.Column="1" 
+                           Margin="0,0,0,15"/>
+
+                <!-- Название -->
+                <TextBlock Text="Название:" 
+                           Grid.Row="1" 
+                           Grid.Column="0" 
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,15"/>
+                <TextBlock Text="{Binding Book.Title}" 
+                           Grid.Row="1" 
+                           Grid.Column="1" 
+                           Margin="0,0,0,15"
+                           TextWrapping="Wrap"/>
+
+                <!-- Автор -->
+                <TextBlock Text="Автор:" 
+                           Grid.Row="2" 
+                           Grid.Column="0" 
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,15"/>
+                <TextBlock Text="{Binding Book.Author.FullName}" 
+                           Grid.Row="2" 
+                           Grid.Column="1" 
+                           Margin="0,0,0,15"/>
+
+                <!-- Жанр -->
+                <TextBlock Text="Жанр:" 
+                           Grid.Row="3" 
+                           Grid.Column="0" 
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,15"/>
+                <TextBlock Text="{Binding Book.Genre.Name}" 
+                           Grid.Row="3" 
+                           Grid.Column="1" 
+                           Margin="0,0,0,15"/>
+
+                <!-- Год издания -->
+                <TextBlock Text="Год издания:" 
+                           Grid.Row="4" 
+                           Grid.Column="0" 
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,15"/>
+                <TextBlock Text="{Binding Book.PublicationYear}" 
+                           Grid.Row="4" 
+                           Grid.Column="1" 
+                           Margin="0,0,0,15"/>
+
+                <!-- Доступность -->
+                <TextBlock Text="Доступность:" 
+                           Grid.Row="5" 
+                           Grid.Column="0" 
+                           FontWeight="Bold"
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,15"/>
+                <TextBlock Text="{Binding Book.IsAvailable, Converter={StaticResource BoolToAvailabilityConverter}}" 
+                           Grid.Row="5" 
+                           Grid.Column="1" 
+                           Margin="0,0,0,15"/>
+            </Grid>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,20,0,0">
+            <Button Content="Закрыть" 
+                    Command="{Binding CloseCommand}" 
+                    Padding="15,10" 
+                    Margin="0,0,10,0" 
+                    Background="#E0E0E0" 
+                    BorderThickness="0"/>
+            <Button Content="Редактировать" 
+                    Command="{Binding EditCommand}" 
+                    Padding="15,10" 
+                    Background="#2196F3" 
+                    Foreground="White" 
+                    BorderThickness="0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
